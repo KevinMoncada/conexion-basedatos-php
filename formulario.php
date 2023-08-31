@@ -8,6 +8,28 @@ include("conexion.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <?php
+    $nitocc="";
+    $nombres="";
+    $direccion="";
+    $telefono="";
+    $fecha="";
+    $cupo="";
+    $foto="";
+    if (isset($_POST["buscar"])) {
+        $nitoccbus = $_POST['nitoccbus'];
+        $consulta=$conexion->query("SELECT * FROM cliente WHERE nitocc = $nitocc");
+        while ($resultadoconsulta = $consulta -> fetch_array()) {
+            $nitocc = $resultadoconsulta[0];
+            $nombres = $resultadoconsulta[1];
+            $direccion = $resultadoconsulta[2];
+            $telefono = $resultadoconsulta[3];
+            $fecha = $resultadoconsulta[4];
+            $cupo = $resultadoconsulta[5];
+            $foto = $resultadoconsulta[6];
+        }
+    }
+    ?>
 </head>
 <body>
     
@@ -16,31 +38,31 @@ include("conexion.php");
     <form action="" method="post" enctype="multipart/form-data">
         <label for="buscar">Buscar:</label>
         <input type="text" name="nitoccbus" id="" placeholder="Buscar Cliente">
-        <input type="submit" value="buscar">
+        <input type="submit" value="buscar" name="buscar">
         <hr>
         <label for="">Nit o CC:</label>
-        <input type="text" name="nitocc" id="" placeholder="Ingrese el nit o CC del nuevo cliente">
+        <input type="text" name="nitocc" id="" placeholder="Ingrese el nit o CC del nuevo cliente" value="<?php echo $nitocc; ?>">
         <br> <br>
         <label for="">Nombres: </label>
-        <input type="text" name="nombres" id="" placeholder="Ingresa el nombre completo">
+        <input type="text" name="nombres" id="" placeholder="Ingresa el nombre completo" value="<?php echo $nombres; ?>">
         <br> <br>
         <label for="">Direccion:</label>
-        <input type="text" name="direccion" id="" placeholder="Ejemplo: Calle 47 #82-96A sur">
+        <input type="text" name="direccion" id="" placeholder="Ejemplo: Calle 47 #82-96A sur" value="<?php echo $direccion; ?>">
         <br><br>
         <label for="">Telefono:</label>
-        <input type="number" name="telefono" id="" placeholder="Ingrese su numero de contacto">
+        <input type="number" name="telefono" id="" placeholder="Ingrese su numero de contacto" value="<?php echo $telefono; ?>">
         <br><br>
         <label for="">Fecha de Ingreso:</label>
-        <input type="date" name="fechaingreso" id="">
+        <input type="date" name="fechaingreso" id="" value="<?php echo $fecha; ?>">
         <br><br>
         <label for="">Cupo del credito:</label>
-        <input type="number" name="cupodelcredito" id="" placeholder="$ valor en pesos">
+        <input type="number" name="cupodelcredito" id="" placeholder="$ valor en pesos" value="<?php echo $cupo; ?>">
         <br><br>
         <label for="">Subir Foto:</label>
         <input type="file" name="foto" id="">
         <br> <br>
         <label for="">Foto:</label>
-        <img src="" alt="" width="50px" height="50px">
+        <img src="<?php echo $foto; ?>" alt="" width="50px" height="50px">
         <br> <br>
         <input type="submit" value="Guardar Nuevo Cliente" name="guardar">
         <input type="submit" value="Listar todos los Clientes" name="listar">
